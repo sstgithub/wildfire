@@ -1,0 +1,37 @@
+%h1 Listing wildfires
+%table
+  %thead
+    %tr
+      %th Start date
+      %th End date
+      %th Description
+      %th Area burned
+      %th Fatalities
+      %th
+      %th
+      %th
+  %tbody
+    - @wildfires.each do |wildfire|
+      %tr
+        %td= wildfire.start_date
+        %td= wildfire.end_date
+        %td= wildfire.description
+        %td= wildfire.area_burned
+        %td= wildfire.fatalities
+        %td= link_to 'Show', wildfire
+        %td= link_to 'Edit', edit_wildfire_path(wildfire)
+        %td= link_to 'Destroy', wildfire, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Wildfire', new_wildfire_path
+
+
+/ = form_tag search_wildfires_path, method: "put" do
+/   = select_tag :location_id
+/   = text_field_tag :state
+/   = submit_tag
+
+= form_tag(wildfires_path, :method => "get", id: "search-form") do
+  = select_tag :wildfire_id, :location_state
+  = text_field_tag :search, params[:search], placeholder: "Search Wildfires"
+  = submit_tag "Search"
+
