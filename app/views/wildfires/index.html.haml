@@ -26,14 +26,7 @@
 %br/
 = link_to 'New Wildfire', new_wildfire_path
 
-
-/ = form_tag search_wildfires_path, method: "put" do
-/   = select_tag :location_id
-/   = text_field_tag :state
-/   = submit_tag
-
 = form_tag(wildfires_path, :method => "get", id: "search-form") do
-  / = select_tag :wildfire_id, :location_state, :location_city
   = select_tag "wildfire_id", options_for_select(['---', 'State', 'Description','Area Burned'])
   = text_field_tag :search, params[:search], placeholder: "Search Wildfires"
   = submit_tag "Search"
