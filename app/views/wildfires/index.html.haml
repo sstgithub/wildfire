@@ -2,6 +2,7 @@
 %table
   %thead
     %tr
+      %th Id
       %th Start date
       %th End date
       %th Description
@@ -13,6 +14,7 @@
   %tbody
     - @wildfires.each do |wildfire|
       %tr
+        %td= wildfire.id
         %td= wildfire.start_date
         %td= wildfire.end_date
         %td= wildfire.description
@@ -31,7 +33,11 @@
 /   = submit_tag
 
 = form_tag(wildfires_path, :method => "get", id: "search-form") do
-  = select_tag :wildfire_id, :location_state
+  / = select_tag :wildfire_id, :location_state, :location_city
+  = select_tag "wildfire_id", options_for_select(['State', 'Description','Area Burned'])
   = text_field_tag :search, params[:search], placeholder: "Search Wildfires"
   = submit_tag "Search"
+
+
+
 
