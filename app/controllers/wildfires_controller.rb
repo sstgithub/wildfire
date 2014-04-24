@@ -5,11 +5,6 @@ class WildfiresController < ApplicationController
   # GET /wildfires.json
   def index
     @wildfires = Wildfire.all
-    if params[:search]
-      @wildfires = Wildfire.search(params[:search]).order("created_at DESC")
-    else
-      @wildfires = Wildfire.all.order('created_at DESC')
-    end
   end
 
   # GET /wildfires/1
@@ -66,6 +61,11 @@ class WildfiresController < ApplicationController
     end
   end
 
+  # GET "/wildfires/search"
+  def search
+    @wildfires = Wildfire.search(params[:search])
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_wildfire
@@ -74,6 +74,50 @@ class WildfiresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def wildfire_params
-      params.require(:wildfire).permit(:start_date, :end_date, :description, :area_burned, :fatalities)
+      params.require(:wildfire).permit!
     end
 end
+
+#   def index
+#     @wildfires = Wildfire.all
+#   end
+
+#   def new
+#     @new_wildfire = Wildfire.new
+#   end
+
+#   def create
+#     @new_wildfire = Wildfire.new(wildfire_params)
+#     if @new_wildfire.save
+#       redirect_to wildfires_path # "/wildfires"
+#     else
+#       redirect_to new_wildfire_path
+#     end
+#   end
+
+#   # PATCH "/wildfires/:id/change_burning"
+#   def change_burning
+#     @wildfire = Wildfire.find(params[:id])
+#     if @wildfire.currently_active
+#       val = false
+#     else
+#       val = true
+#     end
+#     @wildfire.update_attributes(:currently_active => val)
+#     redirect_to wildfires_path
+#   end
+
+#   # GET "/wildfires/search"
+#   def search
+#     @wildfires = Wildfire.search(params[:search])
+    
+#   end
+
+#   private
+
+#   def wildfire_params
+#     params.require(:wildfire).permit!
+#   end
+# end
+
+

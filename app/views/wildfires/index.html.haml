@@ -1,10 +1,32 @@
+= form_tag(wildfires_path, :method => "get", id: "search-form") do
+  = label_tag "Description"
+  = text_field_tag 'search[description]'
+  %br
+  = label_tag "City"
+  = select_tag 'search[city]', options_for_select(Location.pluck(:city)), include_blank: true
+  %br
+  = label_tag "State"
+  = select_tag 'search[state]', options_for_select(Location.pluck(:state)), include_blank: true
+  %br
+  = label_tag "Still active?"
+  = select_tag "search[current]", options_for_select(["Yes", "No"]), include_blank: true
+  %br
+  = submit_tag "SEARCH"
+
+/ = form_tag(wildfires_path, :method => "get", id: "search-form") do
+/   = select_tag "wildfire_id", options_for_select(['---', 'State', 'Description','Area Burned'])
+/   = text_field_tag :search, params[:search], placeholder: "Search Wildfires"
+/   = submit_tag "Search"  
+
+
+
+
 %h1 Listing wildfires
 %table
   %thead
     %tr
       %th Id
       %th Start date
-      %th End date
       %th Description
       %th Area burned
       %th Fatalities
@@ -15,22 +37,18 @@
     - @wildfires.each do |wildfire|
       %tr
         %td= wildfire.id
-        %td= wildfire.start_date
-        %td= wildfire.end_date
+        %td= wildfire.start_date  
         %td= wildfire.description
         %td= wildfire.area_burned
         %td= wildfire.fatalities
         %td= link_to 'Show', wildfire
         %td= link_to 'Edit', edit_wildfire_path(wildfire)
         %td= link_to 'Destroy', wildfire, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
-= link_to 'New Wildfire', new_wildfire_path
-
-= form_tag(wildfires_path, :method => "get", id: "search-form") do
-  = select_tag "wildfire_id", options_for_select(['---', 'State', 'Description','Area Burned'])
-  = text_field_tag :search, params[:search], placeholder: "Search Wildfires"
-  = submit_tag "Search"
+%br
+= link_to 'New Wildfire', new_wildfire_path, method: "get"
 
 
+
+%a.btn.btn-large.btn-primary{href: "#"} Sign up now!
 
 

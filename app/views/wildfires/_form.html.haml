@@ -10,11 +10,7 @@
   .field
     = f.label :start_date
     %br/
-    = f.date_select :start_date
-  .field
-    = f.label :end_date
-    %br/
-    = f.date_select :end_date
+    = f.date_select :start_date 
   .field
     = f.label :description
     %br/
@@ -27,5 +23,8 @@
     = f.label :fatalities
     %br/
     = f.number_field :fatalities
+  .field
+    = f.label 'Still active? (Put "true" or "false")'
+    = f.text_field :currently_active
   .actions
     = f.submit

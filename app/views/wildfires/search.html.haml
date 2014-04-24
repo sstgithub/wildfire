@@ -1,0 +1,13 @@
+- @wildfires.each do |w|
+	Start date:
+	= w.start_date
+	%br
+	Description:
+	= w.description
+	%br
+	Currently burning:
+	= w.currently_burning
+	%br
+	= link_to "change burning status", change_burning_wildfire_path(w), method: 'patch'
+	%br
+	%br
