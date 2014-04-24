@@ -39,9 +39,9 @@ class WildfiresController < ApplicationController
 
   # PATCH/PUT /wildfires/1
   # PATCH/PUT /wildfires/1.json
-  def update
+  def search
     respond_to do |format|
-      if @wildfire.update(wildfire_params)
+      if @wildfire.search(wildfire_params)
         format.html { redirect_to @wildfire, notice: 'Wildfire was successfully updated.' }
         format.json { head :no_content }
       else
@@ -67,15 +67,15 @@ class WildfiresController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_wildfire
-      @wildfire = Wildfire.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_wildfire
+    @wildfire = Wildfire.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def wildfire_params
-      params.require(:wildfire).permit!
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def wildfire_params
+    params.require(:wildfire).permit!
+  end
 end
 
 #   def index
